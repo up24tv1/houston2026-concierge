@@ -1,0 +1,80 @@
+{
+  "headline": "Houston 2026 Concierge",
+  "subheadline": "Expert local support",
+  "cta_primary": "Plan Now",
+  "trust_strip": [
+    "Personalized service",
+    "Local expertise",
+    "Multilingual staff",
+    "Discreet support"
+  ],
+  "services": [
+    {
+      "title": "Match Tickets",
+      "body": "We secure tickets to the 7 matches at NRG Stadium. Our team ensures you get the best seats for an unforgettable experience."
+    },
+    {
+      "title": "Hotel Bookings",
+      "body": "From boutique hotels to luxury suites, we handpick accommodations to fit your style and budget. Our partnerships guarantee the best rates and availability."
+    },
+    {
+      "title": "Ground Transport",
+      "body": "We arrange for seamless airport transfers and ground transportation, so you can focus on the tournament. Our drivers are knowledgeable and courteous."
+    },
+    {
+      "title": "Restaurant Reservations",
+      "body": "Houston's culinary scene is diverse and vibrant. We make reservations at the best restaurants, from Tex-Mex to haute cuisine, and provide insider recommendations."
+    },
+    {
+      "title": "Watch Parties",
+      "body": "On non-match days, join us for watch parties at exclusive venues, featuring live broadcasts, food, and drinks. Our events are designed to bring fans together."
+    },
+    {
+      "title": "24/7 Support",
+      "body": "Our multilingual team is available around the clock to assist with any needs or questions. We speak English, Spanish, French, and Portuguese."
+    }
+  ],
+  "why_houston": "Houston is a vibrant, multicultural city with a thriving food scene and rich cultural attractions. As a host city, it offers a unique blend of Texas hospitality and international flair. With 7 matches at NRG Stadium, Houston is an ideal hub for your World Cup 2026 experience.",
+  "how_it_works": [
+    {
+      "step": "01",
+      "title": "Get Quote",
+      "body": "Contact us to discuss your preferences and receive a personalized quote."
+    },
+    {
+      "step": "02",
+      "title": "Customize",
+      "body": "Work with our team to tailor your itinerary, including match tickets, hotels, and activities."
+    },
+    {
+      "step": "03",
+      "title": "Enjoy",
+      "body": "Relax and enjoy your World Cup 2026 experience in Houston, with our dedicated support team available 24/7."
+    }
+  ],
+  "faq": [
+    {
+      "q": "What languages do you support?",
+      "a": "We provide support in English, Spanish, French, and Portuguese. Our team is multilingual and happy to assist with any questions or needs."
+    },
+    {
+      "q": "Can I customize my itinerary?",
+      "a": "Yes, we work with you to create a personalized itinerary that fits your preferences and budget. Our team is flexible and accommodating."
+    },
+    {
+      "q": "How do I get tickets to the matches?",
+      "a": "We secure tickets to the 7 matches at NRG Stadium and ensure you get the best seats available. Our team handles all ticket arrangements."
+    },
+    {
+      "q": "What if I need help during my stay?",
+      "a": "Our dedicated support team is available 24/7 to assist with any needs or questions. We are just a phone call away."
+    },
+    {
+      "q": "Can I book restaurants and activities through you?",
+      "a": "Yes, we make reservations at the best restaurants and provide recommendations for activities and attractions in Houston. Our team is knowledgeable about the city and happy to help."
+    }
+  ],
+  "final_cta_headline": "Ready to Experience Houston 2026?",
+  "final_cta_body": "Contact us to start planning your unforgettable World Cup 2026 experience in Houston.",
+  "footer_tagline": "Your Houston 2026 Concierge Experts"
+}
