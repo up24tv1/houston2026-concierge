@@ -3,412 +3,685 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Houston 2026 Concierge — Your fixer for Houston, World Cup summer.</title>
+<title>Houston 2026 Concierge — Your fixer for the World Cup, Texas style.</title>
 <meta name="description" content="Seven matches at NRG Stadium over three weeks. Tickets, hotels you can sleep in, airport runs, restaurant tables, watch parties on dark days, and someone who picks up on the first ring — in English, Spanish, French, and Portuguese.">
-<meta name="theme-color" content="#0b1530">
+<meta name="theme-color" content="#1a0f0a">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Houston 2026 Concierge">
-<meta property="og:description" content="Your fixer for Houston, World Cup summer. Tickets, hotels, transport, restaurants, watch parties, 24/7 multilingual support.">
+<meta property="og:description" content="Boutique trip planning for the FIFA World Cup 2026. Texas hospitality. Seven matches. Three weeks. One number.">
 <meta property="og:image" content="./images/hero.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700;9..144,800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Marcellus&family=Hanken+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
+  /* ═════════════════════════════════════════════════════════════════
+     LONE STAR EDITORIAL — Houston 2026 Concierge
+     Aesthetic: luxury hospitality magazine × quiet Texas heritage
+     Palette: saddle / terracotta / brass on warm-dark cream-paper-inverse
+     ═════════════════════════════════════════════════════════════════ */
+
   :root {
-    --navy: #0b1530;
-    --navy-2: #131e44;
-    --navy-3: #1c2960;
-    --gold: #e6b13a;
-    --gold-warm: #f3c659;
-    --sunset: #ff7849;
-    --magenta: #d6356f;
-    --ink: #060a1a;
-    --paper: #f6f1e6;
-    --paper-soft: #ece4d2;
-    --line: rgba(255,255,255,0.10);
-    --line-strong: rgba(255,255,255,0.22);
-    --text-dim: rgba(246,241,230,0.66);
-    --text-faint: rgba(246,241,230,0.36);
-    --radius: 18px;
-    --radius-lg: 28px;
-    --shadow-soft: 0 10px 40px rgba(0,0,0,0.35);
-    --shadow-glow: 0 24px 80px rgba(230,177,58,0.18), 0 6px 24px rgba(0,0,0,0.45);
+    /* base — warm dark */
+    --paper: #1a0f0a;             /* deep saddle near-black */
+    --paper-soft: #2a1a10;        /* card surface */
+    --paper-lift: #3a2418;        /* card hover */
+    --ink: #f4ede0;               /* warm cream text */
+    --ink-dim: rgba(244,237,224,0.62);
+    --ink-faint: rgba(244,237,224,0.32);
+    --line: rgba(244,237,224,0.10);
+    --line-strong: rgba(244,237,224,0.22);
+
+    /* texas palette */
+    --terracotta: #c45f3c;
+    --terracotta-deep: #8c3e22;
+    --burnt-sienna: #a8472a;
+    --brass: #c9a86b;
+    --brass-bright: #e0c285;
+    --saddle: #6b3a1f;
+    --bluebonnet: #4a5d8f;
+    --lone-star-navy: #0a2342;
+    --hill-country: #d9bc8c;
+
+    --radius: 14px;
+    --radius-lg: 24px;
+    --shadow-paper: 0 14px 50px rgba(0,0,0,0.55), 0 4px 12px rgba(0,0,0,0.35);
+    --shadow-glow: 0 28px 90px rgba(196,95,60,0.22), 0 8px 24px rgba(0,0,0,0.55);
+
+    --ease: cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
   body {
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
-    background: var(--ink);
-    color: var(--paper);
-    line-height: 1.65;
+    font-family: 'Hanken Grotesk', system-ui, sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.6;
     overflow-x: hidden;
-    font-feature-settings: 'ss01','ss02','cv01','cv11';
+    font-feature-settings: 'ss01','ss02','cv11';
+    -webkit-font-smoothing: antialiased;
   }
   img { max-width: 100%; display: block; }
   a { color: inherit; text-decoration: none; }
-  ::selection { background: var(--gold); color: var(--ink); }
+  ::selection { background: var(--terracotta); color: var(--ink); }
 
-  /* ───────── Background scaffolding ───────── */
-  .bg {
-    position: fixed; inset: 0; z-index: -2;
+  /* ───────── Atmospheric background ───────── */
+  .atmosphere {
+    position: fixed; inset: 0; z-index: -3; pointer-events: none;
     background:
-      radial-gradient(1200px 800px at 85% -10%, rgba(255,120,73,0.22), transparent 60%),
-      radial-gradient(900px 700px at -5% 105%, rgba(214,53,111,0.18), transparent 55%),
-      linear-gradient(180deg, #04060f 0%, var(--navy) 45%, #060a1a 100%);
+      radial-gradient(1400px 900px at 78% -10%, rgba(196,95,60,0.18), transparent 55%),
+      radial-gradient(900px 700px at -8% 28%, rgba(201,168,107,0.10), transparent 55%),
+      radial-gradient(1100px 900px at 60% 120%, rgba(74,93,143,0.10), transparent 55%),
+      linear-gradient(180deg, #120802 0%, var(--paper) 40%, #100802 100%);
   }
   .grain {
-    position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: 0.07; mix-blend-mode: overlay;
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.6'/></svg>");
+    position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: 0.10; mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.7'/></svg>");
   }
+  /* Faint state-of-texas outline as background motif behind hero */
+  .tx-bg {
+    position: absolute; inset: 0; z-index: -1; pointer-events: none; opacity: 0.045;
+    display: grid; place-items: center;
+  }
+  .tx-bg svg { width: min(96vw, 1200px); height: auto; }
+
+  /* ───────── Type scale ───────── */
+  .display { font-family: 'DM Serif Display', serif; font-weight: 400; letter-spacing: -0.015em; line-height: 1.02; }
+  .display em { font-style: italic; }
+  .serif { font-family: 'Marcellus', serif; font-weight: 400; letter-spacing: 0; }
+  .mono { font-family: 'JetBrains Mono', monospace; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; }
 
   /* ───────── Layout ───────── */
-  .shell { width: min(1180px, calc(100% - 2.4rem)); margin-inline: auto; }
-  section { padding-block: clamp(4rem, 9vw, 7.5rem); position: relative; }
+  .shell { width: min(1240px, calc(100% - 2.4rem)); margin-inline: auto; position: relative; }
+  section { padding-block: clamp(4rem, 9vw, 8rem); position: relative; }
 
-  /* ───────── Nav ───────── */
+  /* ═════════════════════════════════════════════════════════════════
+     NAV
+     ═════════════════════════════════════════════════════════════════ */
   .nav {
-    position: sticky; top: 0; z-index: 50;
-    backdrop-filter: blur(18px) saturate(140%);
-    -webkit-backdrop-filter: blur(18px) saturate(140%);
-    background: rgba(6,10,26,0.62);
+    position: sticky; top: 0; z-index: 60;
+    backdrop-filter: blur(22px) saturate(140%);
+    -webkit-backdrop-filter: blur(22px) saturate(140%);
+    background: rgba(26,15,10,0.62);
     border-bottom: 1px solid var(--line);
   }
-  .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 66px; }
-  .brand { display: flex; align-items: center; gap: 12px; font-weight: 600; letter-spacing: -0.01em; }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 70px; }
+  .brand { display: flex; align-items: center; gap: 14px; }
   .brand-mark {
-    width: 36px; height: 36px; border-radius: 11px;
-    background: linear-gradient(135deg, var(--gold), var(--sunset));
+    position: relative;
+    width: 42px; height: 42px;
     display: grid; place-items: center;
-    font-family: 'Fraunces', serif; font-weight: 800; color: var(--ink); font-size: 18px;
-    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.25), 0 6px 18px rgba(230,177,58,0.25);
+    background: linear-gradient(135deg, var(--brass-bright), var(--terracotta));
+    border-radius: 50%;
+    color: var(--paper);
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.28), 0 8px 20px rgba(196,95,60,0.30);
   }
-  .brand-text { font-size: 15px; }
-  .brand-text small { display: block; color: var(--text-faint); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; }
-  .nav-links { display: flex; gap: 28px; font-size: 14px; color: var(--text-dim); }
-  .nav-links a:hover { color: var(--paper); }
+  .brand-mark svg { width: 22px; height: 22px; }
+  .brand-text { line-height: 1.1; }
+  .brand-text strong { font-family: 'Marcellus', serif; font-weight: 400; font-size: 17px; letter-spacing: 0.01em; display: block; }
+  .brand-text small { display: block; color: var(--ink-faint); font-size: 10px; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.16em; text-transform: uppercase; margin-top: 3px; }
+  .nav-links { display: flex; gap: 30px; font-size: 13.5px; color: var(--ink-dim); font-family: 'Marcellus', serif; letter-spacing: 0.01em; }
+  .nav-links a { transition: color .2s var(--ease); }
+  .nav-links a:hover { color: var(--brass-bright); }
   .nav-cta {
-    padding: 9px 16px; border-radius: 999px;
-    background: var(--paper); color: var(--ink); font-weight: 600; font-size: 13px;
-    transition: transform .2s ease, box-shadow .2s ease;
+    padding: 10px 18px; border-radius: 999px;
+    background: var(--ink); color: var(--paper);
+    font-weight: 600; font-size: 13px;
+    transition: transform .2s var(--ease), box-shadow .2s var(--ease);
+    display: inline-flex; align-items: center; gap: 8px;
   }
-  .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 8px 22px rgba(246,241,230,0.18); }
-  @media (max-width: 720px) { .nav-links { display: none; } }
+  .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 10px 26px rgba(244,237,224,0.20); }
+  @media (max-width: 760px) { .nav-links { display: none; } }
 
-  /* ───────── Hero ───────── */
-  .hero { padding-top: clamp(3rem, 6vw, 5rem); padding-bottom: clamp(4rem, 8vw, 7rem); }
-  .hero-grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: clamp(2rem, 5vw, 4rem); align-items: center; }
-  @media (max-width: 900px) { .hero-grid { grid-template-columns: 1fr; } }
+  /* ═════════════════════════════════════════════════════════════════
+     HERO — 3D parallax
+     ═════════════════════════════════════════════════════════════════ */
+  .hero { padding-top: clamp(2.6rem, 5vw, 4.2rem); padding-bottom: clamp(5rem, 8vw, 8rem); position: relative; overflow: hidden; }
+  .hero-grid { display: grid; grid-template-columns: 1.05fr 1.1fr; gap: clamp(2rem, 5vw, 5rem); align-items: center; position: relative; z-index: 2; }
+  @media (max-width: 940px) { .hero-grid { grid-template-columns: 1fr; } }
 
   .eyebrow {
-    display: inline-flex; align-items: center; gap: 10px;
-    font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase;
-    color: var(--gold);
-    padding: 6px 12px; border-radius: 999px;
-    background: rgba(230,177,58,0.10);
-    border: 1px solid rgba(230,177,58,0.28);
+    display: inline-flex; align-items: center; gap: 12px;
+    font-family: 'JetBrains Mono', monospace; font-weight: 500;
+    font-size: 11px; letter-spacing: 0.20em; text-transform: uppercase;
+    color: var(--brass-bright);
+    padding: 8px 14px; border-radius: 999px;
+    background: rgba(201,168,107,0.07);
+    border: 1px solid rgba(201,168,107,0.28);
   }
-  .eyebrow::before {
-    content: ""; width: 6px; height: 6px; border-radius: 999px; background: var(--gold);
-    box-shadow: 0 0 12px var(--gold);
+  .eyebrow .star {
+    width: 10px; height: 10px;
+    background: var(--brass-bright);
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    filter: drop-shadow(0 0 6px rgba(224,194,133,0.6));
   }
+
   h1.headline {
-    font-family: 'Fraunces', serif;
-    font-weight: 500;
-    font-size: clamp(2.4rem, 5.8vw, 4.6rem);
-    line-height: 1.02;
-    letter-spacing: -0.025em;
-    margin: 1.4rem 0 1.2rem;
+    font-family: 'DM Serif Display', serif; font-weight: 400;
+    font-size: clamp(2.6rem, 6.8vw, 5.6rem); line-height: 0.98; letter-spacing: -0.025em;
+    margin: 1.6rem 0 1.3rem;
   }
   h1.headline em {
-    font-style: italic;
-    font-weight: 400;
-    background: linear-gradient(110deg, var(--gold-warm), var(--sunset) 60%, var(--magenta));
+    font-style: italic; font-weight: 400;
+    background: linear-gradient(110deg, var(--brass-bright) 0%, var(--terracotta) 55%, var(--terracotta-deep));
     -webkit-background-clip: text; background-clip: text; color: transparent;
   }
   .lede {
-    font-size: clamp(1.02rem, 1.45vw, 1.18rem);
-    color: var(--text-dim);
+    font-size: clamp(1.04rem, 1.4vw, 1.18rem);
+    color: var(--ink-dim);
     max-width: 38rem;
-    margin-bottom: 2rem;
+    margin-bottom: 2.2rem;
+    line-height: 1.7;
   }
   .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
   .btn-primary {
-    display: inline-flex; align-items: center; gap: 10px;
-    padding: 14px 22px; border-radius: 999px;
-    background: var(--paper); color: var(--ink);
-    font-weight: 600; font-size: 15px;
-    transition: transform .18s ease, box-shadow .18s ease;
+    display: inline-flex; align-items: center; gap: 12px;
+    padding: 16px 24px; border-radius: 999px;
+    background: var(--ink); color: var(--paper);
+    font-weight: 600; font-size: 14.5px;
+    transition: transform .22s var(--ease), box-shadow .22s var(--ease);
+    position: relative; overflow: hidden;
   }
-  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 14px 36px rgba(246,241,230,0.22); }
-  .btn-primary svg { transition: transform .2s ease; }
-  .btn-primary:hover svg { transform: translateX(3px); }
+  .btn-primary::before {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(110deg, transparent, rgba(255,255,255,0.55), transparent);
+    transform: translateX(-110%); transition: transform .6s var(--ease);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 16px 40px rgba(244,237,224,0.22); }
+  .btn-primary:hover::before { transform: translateX(110%); }
+  .btn-primary svg { transition: transform .22s var(--ease); }
+  .btn-primary:hover svg { transform: translateX(4px); }
+
   .btn-ghost {
     display: inline-flex; align-items: center; gap: 10px;
-    padding: 13px 20px; border-radius: 999px;
-    background: rgba(255,255,255,0.04);
-    color: var(--paper);
+    padding: 15px 22px; border-radius: 999px;
+    background: transparent;
+    color: var(--ink);
     font-weight: 500; font-size: 14px;
     border: 1px solid var(--line-strong);
-    transition: background .18s ease, border-color .18s ease;
+    transition: background .2s var(--ease), border-color .2s var(--ease);
   }
-  .btn-ghost:hover { background: rgba(255,255,255,0.08); border-color: var(--paper); }
+  .btn-ghost:hover { background: rgba(255,255,255,0.04); border-color: var(--brass); }
 
-  .hero-meta {
-    margin-top: 2.2rem; display: flex; gap: 26px; flex-wrap: wrap;
-    color: var(--text-dim); font-size: 13px;
-  }
-  .hero-meta span strong { color: var(--paper); font-weight: 600; display: block; font-size: 15px; }
+  .hero-meta { margin-top: 2.4rem; display: flex; gap: 32px; flex-wrap: wrap; color: var(--ink-dim); font-size: 12px; font-family: 'JetBrains Mono', monospace; }
+  .hero-meta div strong { color: var(--brass-bright); font-weight: 600; display: block; font-size: 16px; font-family: 'Marcellus', serif; letter-spacing: 0.01em; text-transform: none; margin-bottom: 2px; }
+  .hero-meta div span { letter-spacing: 0.10em; text-transform: uppercase; }
 
-  .hero-visual {
+  /* ─── Hero visual: 3D parallax stack ─── */
+  .hero-stage {
     position: relative;
+    aspect-ratio: 16/11;
+    perspective: 1600px;
+    perspective-origin: 50% 40%;
+  }
+  .hero-card {
+    position: absolute; inset: 0;
     border-radius: var(--radius-lg);
     overflow: hidden;
-    aspect-ratio: 16/11;
-    background: var(--navy);
+    background: var(--paper-soft);
     box-shadow: var(--shadow-glow);
-    transform: perspective(1400px) rotateY(-3deg) rotateX(2deg);
+    transform: rotateY(-7deg) rotateX(4deg);
+    transform-style: preserve-3d;
+    border: 1px solid var(--line-strong);
+    transition: transform .8s var(--ease);
   }
-  .hero-visual img { width: 100%; height: 100%; object-fit: cover; }
-  .hero-visual::after {
+  .hero-card img { width: 100%; height: 100%; object-fit: cover; }
+  .hero-card::after {
     content: ""; position: absolute; inset: 0;
-    background: linear-gradient(180deg, transparent 50%, rgba(6,10,26,0.55));
+    background: linear-gradient(180deg, transparent 45%, rgba(26,15,10,0.55) 100%);
     pointer-events: none;
   }
-  .hero-visual .card {
+  .hero-badge {
     position: absolute; bottom: 22px; left: 22px; right: 22px;
     display: flex; gap: 14px; align-items: center;
     padding: 14px 18px;
-    background: rgba(11,21,48,0.78);
+    background: rgba(26,15,10,0.78);
     backdrop-filter: blur(14px);
     border: 1px solid var(--line-strong);
     border-radius: 14px;
-    font-size: 13px;
+    transform: translateZ(40px);
   }
-  .hero-visual .card .dot {
-    width: 8px; height: 8px; border-radius: 999px; background: #2ee878;
-    box-shadow: 0 0 10px #2ee878;
+  .hero-badge .dot {
+    width: 8px; height: 8px; border-radius: 999px; background: #4ade80;
+    box-shadow: 0 0 10px #4ade80;
     animation: pulse 1.8s ease-in-out infinite;
   }
-  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.45; } }
-  .hero-visual .card strong { display: block; font-size: 14px; }
-  .hero-visual .card small { color: var(--text-dim); font-size: 12px; }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+  .hero-badge strong { display: block; font-size: 14px; font-family: 'Marcellus', serif; }
+  .hero-badge small { color: var(--ink-dim); font-size: 11.5px; }
 
-  /* ───────── Trust strip ───────── */
-  .trust { border-block: 1px solid var(--line); padding: 22px 0; }
-  .trust-row { display: flex; flex-wrap: wrap; gap: 18px 40px; justify-content: space-between; align-items: center; }
-  .trust-row span {
-    display: inline-flex; align-items: center; gap: 10px;
-    color: var(--text-dim); font-size: 13px; letter-spacing: 0.02em;
+  /* Floating decoration ticket stub */
+  .ticket-stub {
+    position: absolute;
+    right: -28px; top: -28px;
+    width: 200px; padding: 14px 16px;
+    background: linear-gradient(135deg, var(--paper-soft), var(--paper-lift));
+    border: 1px solid var(--brass);
+    border-radius: 12px;
+    transform: rotate(8deg) translateZ(60px);
+    box-shadow: 0 18px 40px rgba(0,0,0,0.45);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+    z-index: 4;
+    pointer-events: none;
   }
-  .trust-row span::before {
-    content: ""; width: 16px; height: 16px; border-radius: 4px;
-    background: linear-gradient(135deg, var(--gold), var(--sunset));
-    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.3);
+  .ticket-stub::before {
+    content: ""; position: absolute; left: -6px; top: 50%; transform: translateY(-50%);
+    width: 12px; height: 12px; border-radius: 50%; background: var(--paper);
+    box-shadow: inset 0 0 0 1px var(--brass);
+  }
+  .ticket-stub::after {
+    content: ""; position: absolute; right: -6px; top: 50%; transform: translateY(-50%);
+    width: 12px; height: 12px; border-radius: 50%; background: var(--paper);
+    box-shadow: inset 0 0 0 1px var(--brass);
+  }
+  .ticket-stub strong { display: block; color: var(--brass-bright); font-family: 'Marcellus', serif; text-transform: none; letter-spacing: 0; font-size: 14px; margin-bottom: 4px; }
+  @media (max-width: 940px) { .ticket-stub { display: none; } }
+
+  /* Floating decoration: lone star token */
+  .star-token {
+    position: absolute;
+    left: -36px; bottom: -28px;
+    width: 88px; height: 88px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--brass-bright), var(--saddle));
+    display: grid; place-items: center;
+    transform: rotate(-12deg) translateZ(70px);
+    box-shadow: 0 14px 30px rgba(0,0,0,0.55), inset 0 0 0 1px rgba(255,255,255,0.30);
+    z-index: 5;
+    animation: float 5s ease-in-out infinite;
+  }
+  .star-token svg { width: 38px; height: 38px; color: var(--paper); }
+  @keyframes float { 0%,100% { transform: rotate(-12deg) translateY(0) translateZ(70px); } 50% { transform: rotate(-12deg) translateY(-10px) translateZ(70px); } }
+  @media (max-width: 940px) { .star-token { display: none; } }
+
+  /* ═════════════════════════════════════════════════════════════════
+     MARQUEE — Texas trust strip
+     ═════════════════════════════════════════════════════════════════ */
+  .marquee {
+    position: relative;
+    overflow: hidden;
+    border-block: 1px solid var(--line);
+    padding: 26px 0;
+    background:
+      linear-gradient(180deg, rgba(0,0,0,0.18), transparent),
+      var(--paper);
+  }
+  .marquee-track {
+    display: flex;
+    gap: 56px;
+    animation: scroll-left 38s linear infinite;
+    width: max-content;
+  }
+  .marquee-track span {
+    display: inline-flex; align-items: center; gap: 14px;
+    white-space: nowrap;
+    color: var(--ink-dim);
+    font-family: 'Marcellus', serif;
+    font-size: 18px;
+    letter-spacing: 0.01em;
+  }
+  .marquee-track .star-sep {
+    width: 14px; height: 14px;
+    background: var(--terracotta);
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    flex-shrink: 0;
+  }
+  @keyframes scroll-left {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
   }
 
-  /* ───────── Section headings ───────── */
-  .section-head { max-width: 50rem; margin-bottom: 3.2rem; }
-  .section-head .kicker {
-    font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase;
-    color: var(--gold); margin-bottom: 1rem;
+  /* ═════════════════════════════════════════════════════════════════
+     SECTION HEADERS
+     ═════════════════════════════════════════════════════════════════ */
+  .sec-head { max-width: 56rem; margin-bottom: clamp(2.6rem, 5vw, 4rem); }
+  .sec-head .kicker {
+    font-family: 'JetBrains Mono', monospace; font-weight: 500;
+    font-size: 11.5px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--brass); margin-bottom: 1rem;
+    display: inline-flex; align-items: center; gap: 12px;
   }
-  .section-head h2 {
-    font-family: 'Fraunces', serif; font-weight: 400;
-    font-size: clamp(1.9rem, 3.6vw, 2.8rem); line-height: 1.1; letter-spacing: -0.02em;
+  .sec-head .kicker::before {
+    content: ""; width: 32px; height: 1px; background: var(--brass);
   }
-  .section-head h2 em { font-style: italic; color: var(--gold-warm); }
-  .section-head p {
-    color: var(--text-dim); margin-top: 1rem; font-size: clamp(1rem, 1.2vw, 1.08rem);
-    max-width: 36rem;
+  .sec-head h2 {
+    font-family: 'DM Serif Display', serif; font-weight: 400;
+    font-size: clamp(2.1rem, 4.2vw, 3.4rem); line-height: 1.06; letter-spacing: -0.022em;
+  }
+  .sec-head h2 em {
+    font-style: italic;
+    background: linear-gradient(110deg, var(--brass-bright), var(--terracotta));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .sec-head p {
+    color: var(--ink-dim); margin-top: 1.2rem;
+    font-size: clamp(1rem, 1.2vw, 1.08rem);
+    max-width: 38rem; line-height: 1.7;
   }
 
-  /* ───────── Services grid ───────── */
+  /* ═════════════════════════════════════════════════════════════════
+     SERVICES — Tilting cards
+     ═════════════════════════════════════════════════════════════════ */
   .services-grid {
     display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 18px;
   }
   .card-service {
     position: relative;
-    padding: 28px 26px 30px;
-    background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.015));
+    padding: 32px 28px 34px;
+    background: linear-gradient(180deg, rgba(244,237,224,0.04), rgba(244,237,224,0.015));
     border: 1px solid var(--line);
     border-radius: var(--radius);
-    transition: transform .25s ease, border-color .25s ease, background .25s ease;
+    transition: transform .35s var(--ease), border-color .35s var(--ease), background .35s var(--ease), box-shadow .35s var(--ease);
+    transform-style: preserve-3d;
     overflow: hidden;
+    isolation: isolate;
   }
-  .card-service::before {
-    content: ""; position: absolute; left: 26px; top: 26px;
-    width: 38px; height: 38px; border-radius: 11px;
-    background: linear-gradient(135deg, var(--gold), var(--sunset));
-    opacity: 0.95;
-    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.25);
+  .card-service::after {
+    content: ""; position: absolute; inset: 0;
+    background: radial-gradient(circle at var(--mx,50%) var(--my,0%), rgba(201,168,107,0.10), transparent 50%);
+    opacity: 0; transition: opacity .35s var(--ease);
+    pointer-events: none;
   }
-  .card-service:hover { transform: translateY(-4px); border-color: var(--line-strong); background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02)); }
-  .card-service .icon {
-    position: relative; z-index: 1;
-    width: 38px; height: 38px; display: grid; place-items: center;
-    color: var(--ink); font-weight: 800; font-family: 'Fraunces', serif;
-    margin-bottom: 80px;
+  .card-service:hover { border-color: var(--brass); background: linear-gradient(180deg, rgba(244,237,224,0.06), rgba(244,237,224,0.02)); box-shadow: 0 24px 60px rgba(0,0,0,0.55); }
+  .card-service:hover::after { opacity: 1; }
+  .card-service .num {
+    font-family: 'DM Serif Display', serif; font-weight: 400; font-style: italic;
+    font-size: 3rem; line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: 1px var(--brass);
+    display: block; margin-bottom: 1.6rem;
+    letter-spacing: -0.03em;
   }
   .card-service h3 {
-    font-family: 'Fraunces', serif; font-weight: 500;
-    font-size: 1.35rem; letter-spacing: -0.01em; margin-bottom: 10px;
+    font-family: 'Marcellus', serif; font-weight: 400;
+    font-size: 1.45rem; letter-spacing: 0; margin-bottom: 12px;
+    color: var(--ink);
   }
-  .card-service p { color: var(--text-dim); font-size: 0.97rem; line-height: 1.65; }
+  .card-service p { color: var(--ink-dim); font-size: 0.98rem; line-height: 1.7; }
+  .card-service .corner {
+    position: absolute; top: 14px; right: 14px;
+    width: 20px; height: 20px;
+    background: var(--brass);
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    opacity: 0.45;
+  }
 
-  /* ───────── Why Houston (image + copy split) ───────── */
-  .split { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 5vw, 4rem); align-items: center; }
+  /* ═════════════════════════════════════════════════════════════════
+     SPLIT: Why Houston
+     ═════════════════════════════════════════════════════════════════ */
+  .split { display: grid; grid-template-columns: 1fr 1.05fr; gap: clamp(2rem, 5vw, 5rem); align-items: center; }
   @media (max-width: 900px) { .split { grid-template-columns: 1fr; } }
   .split-image {
     border-radius: var(--radius-lg);
     overflow: hidden;
-    aspect-ratio: 14/10;
-    box-shadow: var(--shadow-soft);
+    aspect-ratio: 4/3;
+    box-shadow: var(--shadow-paper);
     border: 1px solid var(--line-strong);
+    position: relative;
+    transform: perspective(1400px) rotateY(3deg);
   }
   .split-image img { width: 100%; height: 100%; object-fit: cover; }
-  .split-text h2 { font-family: 'Fraunces', serif; font-weight: 400; font-size: clamp(1.9rem, 3.4vw, 2.6rem); line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 1.4rem; }
-  .split-text h2 em { font-style: italic; color: var(--gold-warm); }
-  .split-text p { color: var(--text-dim); font-size: 1.04rem; line-height: 1.75; margin-bottom: 1rem; }
+  .split-image::after {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(140deg, transparent 60%, rgba(196,95,60,0.20));
+  }
+  .split-text h2 { font-family: 'DM Serif Display', serif; font-weight: 400; font-size: clamp(2rem, 3.8vw, 2.9rem); line-height: 1.08; letter-spacing: -0.02em; margin-bottom: 1.4rem; }
+  .split-text h2 em { font-style: italic; background: linear-gradient(110deg, var(--brass-bright), var(--terracotta)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .split-text p { color: var(--ink-dim); font-size: 1.04rem; line-height: 1.75; margin-bottom: 1rem; }
   .split-stats {
     display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px;
-    margin-top: 2.2rem; padding-top: 2rem; border-top: 1px solid var(--line);
+    margin-top: 2.4rem; padding-top: 2rem; border-top: 1px solid var(--line);
   }
   .stat strong {
-    display: block; font-family: 'Fraunces', serif; font-weight: 600; font-size: 1.9rem; color: var(--gold-warm);
-    letter-spacing: -0.02em;
+    display: block; font-family: 'DM Serif Display', serif; font-weight: 400; font-size: 2.3rem;
+    background: linear-gradient(110deg, var(--brass-bright), var(--terracotta));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    letter-spacing: -0.02em; line-height: 1;
+    margin-bottom: 8px;
   }
-  .stat span { display: block; color: var(--text-dim); font-size: 12px; letter-spacing: 0.05em; text-transform: uppercase; }
+  .stat span { display: block; color: var(--ink-faint); font-size: 11px; letter-spacing: 0.10em; text-transform: uppercase; font-family: 'JetBrains Mono', monospace; }
 
-  /* ───────── How it works ───────── */
-  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  /* ═════════════════════════════════════════════════════════════════
+     GALLERY — Polaroid stack
+     ═════════════════════════════════════════════════════════════════ */
+  .gallery-wrap { position: relative; }
+  .gallery-row {
+    display: flex; gap: 22px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding: 2.4rem 1rem 3.2rem;
+    margin-inline: -1rem;
+    scrollbar-width: none;
+  }
+  .gallery-row::-webkit-scrollbar { display: none; }
+  .polaroid {
+    flex: 0 0 320px;
+    scroll-snap-align: center;
+    background: #f4ede0;
+    padding: 14px 14px 56px;
+    box-shadow: 0 18px 40px rgba(0,0,0,0.55), 0 4px 12px rgba(0,0,0,0.3);
+    transition: transform .5s var(--ease), box-shadow .5s var(--ease), z-index 0s .5s;
+    position: relative;
+    transform-origin: center bottom;
+  }
+  .polaroid:nth-child(1) { transform: rotate(-3deg); }
+  .polaroid:nth-child(2) { transform: rotate(2deg) translateY(8px); }
+  .polaroid:nth-child(3) { transform: rotate(-1.2deg); }
+  .polaroid:nth-child(4) { transform: rotate(2.6deg) translateY(6px); }
+  .polaroid:nth-child(5) { transform: rotate(-2.2deg); }
+  .polaroid:nth-child(6) { transform: rotate(1.4deg) translateY(8px); }
+  .polaroid:hover {
+    transform: rotate(0) translateY(-12px) scale(1.04);
+    box-shadow: 0 30px 70px rgba(0,0,0,0.65), 0 10px 20px rgba(0,0,0,0.4);
+    z-index: 5;
+    transition: transform .5s var(--ease), box-shadow .5s var(--ease), z-index 0s 0s;
+  }
+  .polaroid .pic {
+    aspect-ratio: 1/1;
+    overflow: hidden;
+    background: #1a0f0a;
+  }
+  .polaroid .pic img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s var(--ease); }
+  .polaroid:hover .pic img { transform: scale(1.05); }
+  .polaroid .caption {
+    position: absolute; bottom: 16px; left: 18px; right: 18px;
+    font-family: 'Marcellus', serif;
+    color: #2a1a10;
+    font-size: 13.5px;
+    line-height: 1.3;
+    display: flex; justify-content: space-between; align-items: center; gap: 12px;
+  }
+  .polaroid .caption small {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px;
+    color: rgba(42,26,16,0.55); letter-spacing: 0.08em; text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .gallery-hint {
+    margin-top: -1rem; padding-left: 1rem;
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--ink-faint);
+    display: inline-flex; align-items: center; gap: 10px;
+  }
+  .gallery-hint svg { width: 16px; height: 16px; }
+
+  /* ═════════════════════════════════════════════════════════════════
+     HOW IT WORKS
+     ═════════════════════════════════════════════════════════════════ */
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; position: relative; }
   @media (max-width: 760px) { .steps { grid-template-columns: 1fr; } }
   .step {
-    position: relative; padding: 32px 28px;
-    background: linear-gradient(180deg, rgba(28,41,96,0.4), rgba(11,21,48,0.4));
+    position: relative; padding: 36px 30px 30px;
+    background: linear-gradient(180deg, rgba(244,237,224,0.04), rgba(244,237,224,0.01));
     border: 1px solid var(--line);
     border-radius: var(--radius);
+    transition: border-color .3s var(--ease), transform .3s var(--ease);
   }
+  .step:hover { border-color: var(--brass); transform: translateY(-4px); }
   .step-num {
-    font-family: 'Fraunces', serif; font-weight: 300; font-size: 4rem;
-    line-height: 1; letter-spacing: -0.04em;
-    color: transparent;
-    -webkit-text-stroke: 1px var(--gold);
-    margin-bottom: 14px; display: block;
+    font-family: 'DM Serif Display', serif; font-style: italic; font-weight: 400;
+    font-size: 4.6rem; line-height: 0.85; letter-spacing: -0.04em;
+    background: linear-gradient(135deg, var(--brass-bright), var(--terracotta));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    margin-bottom: 18px; display: block;
   }
-  .step h3 { font-family: 'Fraunces', serif; font-weight: 500; font-size: 1.35rem; margin-bottom: 8px; }
-  .step p { color: var(--text-dim); font-size: 0.97rem; }
+  .step h3 { font-family: 'Marcellus', serif; font-weight: 400; font-size: 1.5rem; margin-bottom: 10px; }
+  .step p { color: var(--ink-dim); font-size: 0.98rem; }
 
-  /* ───────── Watch party feature ───────── */
+  /* ═════════════════════════════════════════════════════════════════
+     FEATURE: Watch parties
+     ═════════════════════════════════════════════════════════════════ */
   .feature {
     border-radius: var(--radius-lg);
     overflow: hidden;
-    background: linear-gradient(120deg, var(--navy-2), var(--navy));
+    background: linear-gradient(120deg, var(--paper-soft), var(--paper));
     border: 1px solid var(--line-strong);
     display: grid; grid-template-columns: 1.1fr 1fr; align-items: stretch;
-    box-shadow: var(--shadow-soft);
+    box-shadow: var(--shadow-paper);
+    position: relative;
   }
   @media (max-width: 880px) { .feature { grid-template-columns: 1fr; } }
-  .feature-image { min-height: 320px; position: relative; }
+  .feature-image { min-height: 360px; position: relative; }
   .feature-image img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
   .feature-image::after {
     content: ""; position: absolute; inset: 0;
-    background: linear-gradient(90deg, transparent 40%, rgba(11,21,48,0.65));
-    pointer-events: none;
+    background: linear-gradient(90deg, transparent 38%, rgba(26,15,10,0.7));
   }
   .feature-body { padding: clamp(2rem, 4vw, 3.5rem); }
-  .feature-body .eyebrow { background: rgba(255,255,255,0.06); color: var(--gold-warm); border-color: rgba(230,177,58,0.4); }
-  .feature-body h2 { font-family: 'Fraunces', serif; font-weight: 400; font-size: clamp(1.7rem, 2.8vw, 2.2rem); line-height: 1.15; letter-spacing: -0.02em; margin: 1.2rem 0 1rem; }
-  .feature-body p { color: var(--text-dim); margin-bottom: 1.6rem; }
+  .feature-body .eyebrow { background: rgba(255,255,255,0.06); color: var(--brass-bright); border-color: rgba(201,168,107,0.4); }
+  .feature-body h2 { font-family: 'DM Serif Display', serif; font-weight: 400; font-size: clamp(1.8rem, 3vw, 2.4rem); line-height: 1.15; letter-spacing: -0.02em; margin: 1.4rem 0 1rem; }
+  .feature-body p { color: var(--ink-dim); margin-bottom: 1.8rem; line-height: 1.7; }
 
-  /* ───────── FAQ ───────── */
-  .faq-list { max-width: 50rem; }
+  /* ═════════════════════════════════════════════════════════════════
+     FAQ
+     ═════════════════════════════════════════════════════════════════ */
+  .faq-list { max-width: 54rem; }
   details {
     border-top: 1px solid var(--line);
-    padding: 22px 4px;
-    transition: padding .2s ease;
+    padding: 26px 4px;
   }
   details:last-of-type { border-bottom: 1px solid var(--line); }
   details summary {
     display: flex; justify-content: space-between; align-items: center; gap: 1rem;
     list-style: none; cursor: pointer;
-    font-family: 'Fraunces', serif; font-weight: 500;
-    font-size: 1.1rem; color: var(--paper);
+    font-family: 'Marcellus', serif; font-weight: 400;
+    font-size: 1.18rem; color: var(--ink);
+    transition: color .2s var(--ease);
   }
   details summary::-webkit-details-marker { display: none; }
+  details summary:hover { color: var(--brass-bright); }
   details summary::after {
     content: "+";
-    font-family: 'Inter', sans-serif; font-weight: 300;
-    font-size: 1.8rem; line-height: 1;
-    color: var(--gold);
-    transition: transform .25s ease;
+    font-family: 'DM Serif Display', serif; font-weight: 400;
+    font-size: 2rem; line-height: 1;
+    color: var(--brass);
+    transition: transform .3s var(--ease);
   }
   details[open] summary::after { transform: rotate(45deg); }
   details p {
-    color: var(--text-dim); font-size: 0.98rem; line-height: 1.7;
-    padding-top: 12px; max-width: 42rem;
+    color: var(--ink-dim); font-size: 1rem; line-height: 1.7;
+    padding-top: 14px; max-width: 46rem;
   }
 
-  /* ───────── Final CTA ───────── */
+  /* ═════════════════════════════════════════════════════════════════
+     FINAL CTA
+     ═════════════════════════════════════════════════════════════════ */
   .final-cta {
     text-align: center;
-    padding: clamp(3rem, 6vw, 5rem) clamp(2rem, 4vw, 4rem);
+    padding: clamp(3.5rem, 7vw, 6rem) clamp(2rem, 4vw, 4rem);
     border-radius: var(--radius-lg);
     background:
-      radial-gradient(circle at 30% 0%, rgba(230,177,58,0.18), transparent 50%),
-      radial-gradient(circle at 80% 100%, rgba(255,120,73,0.22), transparent 55%),
-      linear-gradient(180deg, var(--navy-2), var(--navy));
+      radial-gradient(circle at 25% 0%, rgba(201,168,107,0.20), transparent 50%),
+      radial-gradient(circle at 80% 100%, rgba(196,95,60,0.22), transparent 55%),
+      linear-gradient(180deg, var(--paper-soft), var(--paper));
     border: 1px solid var(--line-strong);
+    position: relative;
+    overflow: hidden;
   }
+  .final-cta .tx-shape {
+    position: absolute; right: -120px; top: -50px; width: 480px; opacity: 0.07;
+    pointer-events: none;
+  }
+  .final-cta .tx-shape svg { width: 100%; height: auto; color: var(--brass-bright); }
   .final-cta h2 {
-    font-family: 'Fraunces', serif; font-weight: 400; font-style: italic;
-    font-size: clamp(1.8rem, 3.8vw, 2.8rem); line-height: 1.15; letter-spacing: -0.02em;
-    max-width: 30rem; margin: 0 auto 1.2rem;
+    font-family: 'DM Serif Display', serif; font-weight: 400; font-style: italic;
+    font-size: clamp(1.9rem, 4vw, 3rem); line-height: 1.12; letter-spacing: -0.02em;
+    max-width: 32rem; margin: 1.4rem auto 1.4rem;
+    position: relative; z-index: 1;
   }
-  .final-cta p { color: var(--text-dim); max-width: 28rem; margin: 0 auto 2rem; }
-  .final-cta .actions { display: inline-flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
-  .contact-line { margin-top: 1.6rem; color: var(--text-dim); font-size: 13px; }
-  .contact-line a { color: var(--gold-warm); border-bottom: 1px dashed rgba(230,177,58,0.4); padding-bottom: 1px; }
+  .final-cta p { color: var(--ink-dim); max-width: 30rem; margin: 0 auto 2rem; position: relative; z-index: 1; }
+  .final-cta .actions { display: inline-flex; gap: 12px; flex-wrap: wrap; justify-content: center; position: relative; z-index: 1; }
+  .contact-line { margin-top: 1.8rem; color: var(--ink-dim); font-size: 13px; position: relative; z-index: 1; }
+  .contact-line a { color: var(--brass-bright); border-bottom: 1px dashed rgba(201,168,107,0.45); padding-bottom: 1px; }
 
-  /* ───────── Footer ───────── */
-  footer { padding: 3rem 0 2.4rem; border-top: 1px solid var(--line); margin-top: 4rem; }
-  .foot { display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: space-between; align-items: center; color: var(--text-faint); font-size: 13px; }
-  .foot p strong { color: var(--paper); font-weight: 500; }
+  /* ═════════════════════════════════════════════════════════════════
+     FOOTER
+     ═════════════════════════════════════════════════════════════════ */
+  footer { padding: 4rem 0 3rem; border-top: 1px solid var(--line); margin-top: 5rem; }
+  .foot-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 2rem; }
+  @media (max-width: 760px) { .foot-grid { grid-template-columns: 1fr 1fr; } }
+  .foot-grid h4 { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--brass); margin-bottom: 1rem; }
+  .foot-grid a, .foot-grid p { display: block; color: var(--ink-dim); font-size: 14px; line-height: 1.9; }
+  .foot-grid a:hover { color: var(--brass-bright); }
+  .foot-bot { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--line); color: var(--ink-faint); font-size: 12px; }
 
-  /* ───────── Motion ───────── */
+  /* ═════════════════════════════════════════════════════════════════
+     MOTION
+     ═════════════════════════════════════════════════════════════════ */
   @media (prefers-reduced-motion: no-preference) {
-    .reveal { opacity: 0; transform: translateY(18px); transition: opacity .8s ease, transform .8s ease; }
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity .9s var(--ease), transform .9s var(--ease); }
     .reveal.visible { opacity: 1; transform: translateY(0); }
   }
 </style>
 </head>
 <body>
-<div class="bg"></div>
+
+<div class="atmosphere"></div>
 <div class="grain"></div>
 
+<!-- ════════ NAV ════════ -->
 <header class="nav">
   <div class="shell nav-inner">
     <a href="#" class="brand">
-      <span class="brand-mark">H</span>
-      <span class="brand-text">Houston 2026 Concierge<small>WC host city · Jun 14 – Jul 4, 2026</small></span>
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 1.5l2.75 7.55h7.95l-6.43 4.67 2.46 7.58L12 16.6l-6.73 4.7 2.46-7.58L1.3 9.05h7.95z"/></svg>
+      </span>
+      <span class="brand-text">
+        <strong>Houston 2026</strong>
+        <small>Concierge · Texas hospitality</small>
+      </span>
     </a>
-    <nav class="nav-links">
+    <nav class="nav-links" aria-label="Primary">
       <a href="#services">Services</a>
-      <a href="#why">Houston</a>
-      <a href="#how">How it works</a>
+      <a href="#why">Why Houston</a>
+      <a href="#gallery">The work</a>
+      <a href="#how">Process</a>
       <a href="#faq">FAQ</a>
     </nav>
     <a href="#contact" class="nav-cta">Book a call →</a>
   </div>
 </header>
 
-<section class="hero shell">
-  <div class="hero-grid">
-    <div>
-      <span class="eyebrow">7 matches · NRG Stadium · 3 weeks</span>
-      <h1 class="headline">Your fixer for Houston, <em>World Cup summer.</em></h1>
-      <p class="lede">Tickets to all seven matches at NRG. Hotel beds you can actually sleep in. Airport runs that show up. Restaurant tables on game nights. Watch parties for the dark days. And someone who picks up on the first ring — in English, Spanish, French, or Portuguese.</p>
+<!-- ════════ HERO ════════ -->
+<section class="hero">
+  <div class="tx-bg" aria-hidden="true">
+    <!-- Faint Texas state outline -->
+    <svg viewBox="0 0 1000 900" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--brass);">
+      <path d="M180 220 L260 220 L290 180 L370 195 L420 175 L520 195 L620 205 L660 230 L720 230 L760 220 L820 240 L820 320 L800 380 L790 460 L800 540 L760 600 L700 660 L640 700 L580 720 L520 760 L470 800 L420 800 L370 760 L320 700 L270 660 L230 600 L195 540 L180 460 L185 380 L175 320 Z"/>
+      <!-- Lone star centered -->
+      <path d="M500 380 L520 440 L580 440 L530 478 L552 540 L500 502 L448 540 L470 478 L420 440 L480 440 Z" fill="currentColor"/>
+    </svg>
+  </div>
+
+  <div class="shell hero-grid">
+    <div class="reveal">
+      <span class="eyebrow"><span class="star"></span> 7 matches · NRG Stadium · 3 weeks</span>
+      <h1 class="headline">Your fixer for the<br>World Cup, <em>Texas style.</em></h1>
+      <p class="lede">Seven matches at NRG over three weeks. Tickets, hotel beds you can actually sleep in, airport runs that show up on time, restaurant tables on match nights, and someone who picks up on the first ring — in English, Spanish, French, or Portuguese.</p>
       <div class="hero-actions">
         <a href="#contact" class="btn-primary">
           Book a 20-min call
@@ -417,81 +690,116 @@
         <a href="#services" class="btn-ghost">What we handle</a>
       </div>
       <div class="hero-meta">
-        <span><strong>Jun 14 – Jul 4</strong>Match window at NRG</span>
-        <span><strong>4 languages</strong>EN · ES · FR · PT</span>
-        <span><strong>One person, one number</strong>No call-tree, no chatbot</span>
+        <div><strong>Jun 14 – Jul 4</strong><span>Match window</span></div>
+        <div><strong>4 languages</strong><span>EN · ES · FR · PT</span></div>
+        <div><strong>One number</strong><span>No call tree</span></div>
       </div>
     </div>
-    <div class="hero-visual">
-      <img src="./images/hero.png" alt="NRG Stadium in Houston at golden hour during the FIFA World Cup 2026" loading="eager">
-      <div class="card">
-        <span class="dot"></span>
-        <div>
-          <strong>On the ground in Houston</strong>
-          <small>Replies within the hour, daily 7am – 11pm CT</small>
+
+    <div class="hero-stage reveal" data-tilt>
+      <div class="hero-card">
+        <img src="./images/hero.png" alt="NRG Stadium in Houston at golden hour during the FIFA World Cup 2026" loading="eager">
+        <div class="hero-badge">
+          <span class="dot"></span>
+          <div>
+            <strong>On the ground in Houston</strong>
+            <small>Replies within the hour · 7am – 11pm CT</small>
+          </div>
         </div>
       </div>
+      <div class="ticket-stub" aria-hidden="true">
+        <strong>Match 47</strong>
+        Group F · NRG Stadium · Sec 134
+      </div>
+      <div class="star-token" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 1.5l2.75 7.55h7.95l-6.43 4.67 2.46 7.58L12 16.6l-6.73 4.7 2.46-7.58L1.3 9.05h7.95z"/></svg>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="trust">
-  <div class="shell trust-row">
-    <span>Personalized itineraries</span>
-    <span>Local team, not a call center</span>
-    <span>EN · ES · FR · PT support</span>
-    <span>Quote in 24 hours</span>
+<!-- ════════ MARQUEE ════════ -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Personalized itineraries</span><span class="star-sep"></span>
+    <span>Local team, not a call center</span><span class="star-sep"></span>
+    <span>EN · ES · FR · PT support</span><span class="star-sep"></span>
+    <span>Quote in 24 hours</span><span class="star-sep"></span>
+    <span>Verified ticketing channels</span><span class="star-sep"></span>
+    <span>From the Galleria to NRG</span><span class="star-sep"></span>
+    <!-- Doubled for seamless loop -->
+    <span>Personalized itineraries</span><span class="star-sep"></span>
+    <span>Local team, not a call center</span><span class="star-sep"></span>
+    <span>EN · ES · FR · PT support</span><span class="star-sep"></span>
+    <span>Quote in 24 hours</span><span class="star-sep"></span>
+    <span>Verified ticketing channels</span><span class="star-sep"></span>
+    <span>From the Galleria to NRG</span><span class="star-sep"></span>
+  </div>
+</div>
+
+<!-- ════════ SERVICES ════════ -->
+<section id="services">
+  <div class="shell">
+    <div class="sec-head reveal">
+      <div class="kicker">What we handle</div>
+      <h2>Six things you don't want to figure out <em>at 11pm in a foreign city.</em></h2>
+      <p>A small Houston-based team builds a single itinerary per fan or family — match days, off-days, the connection between them — and stays on call until you fly home.</p>
+    </div>
+
+    <div class="services-grid">
+      <article class="card-service reveal" data-tilt-card>
+        <span class="corner"></span>
+        <span class="num">01</span>
+        <h3>Match tickets</h3>
+        <p>All seven NRG fixtures, from group stage through round of 16 and the quarterfinal. Category 1 through Category 4, plus hospitality if you want it. Paid through verified resale channels — no parking-lot envelopes.</p>
+      </article>
+
+      <article class="card-service reveal" data-tilt-card>
+        <span class="corner"></span>
+        <span class="num">02</span>
+        <h3>Hotels that work</h3>
+        <p>Pre-blocked rooms across the Galleria, Midtown, Downtown, and the Energy Corridor. You tell us the budget and how far you want to be from NRG; we tell you the trade-off in 24 hours, in writing.</p>
+      </article>
+
+      <article class="card-service reveal" data-tilt-card>
+        <span class="corner"></span>
+        <span class="num">03</span>
+        <h3>Airport &amp; ground transport</h3>
+        <p>IAH and Hobby pickups with a name-on-a-sign driver who tracks your flight. Match-night transfers booked early so you're not in a surge queue when the final whistle goes.</p>
+      </article>
+
+      <article class="card-service reveal" data-tilt-card>
+        <span class="corner"></span>
+        <span class="num">04</span>
+        <h3>Restaurants &amp; nightlife</h3>
+        <p>Tables held at the places locals actually eat — barbacoa in the East End, Vietnamese on Bellaire, the steakhouse your group keeps texting about. Shortlist tuned to your group size and noise tolerance.</p>
+      </article>
+
+      <article class="card-service reveal" data-tilt-card>
+        <span class="corner"></span>
+        <span class="num">05</span>
+        <h3>Watch parties (off-days)</h3>
+        <p>Houston hosts 7 of 104 matches; the rest you watch from a rooftop or a Congolese, Brazilian, or Argentine bar with a crowd that cares. We hold table space and tell you when to show up.</p>
+      </article>
+
+      <article class="card-service reveal" data-tilt-card>
+        <span class="corner"></span>
+        <span class="num">06</span>
+        <h3>24/7 multilingual line</h3>
+        <p>One number, one person who knows your itinerary. Need a doctor, a pharmacy, a translator at the stadium gate, a missed-flight rebook — you call us, not a help desk in Manila.</p>
+      </article>
+    </div>
   </div>
 </section>
 
-<section id="services" class="shell">
-  <div class="section-head reveal">
-    <div class="kicker">What we handle</div>
-    <h2>Six things you don't want to figure out <em>at 11pm in a foreign city.</em></h2>
-    <p>We're a small team based in Houston that builds a single itinerary per fan or family — match days, off-days, the connection between them — and stays on call until you fly home.</p>
-  </div>
-
-  <div class="services-grid">
-    <div class="card-service reveal">
-      <div class="icon">01</div>
-      <h3>Match tickets</h3>
-      <p>All seven NRG fixtures, from group stage through round of 16 and the quarterfinal. Category 1 through Category 4, plus hospitality if you want it. Paid through verified resale channels — no parking-lot envelopes.</p>
-    </div>
-    <div class="card-service reveal">
-      <div class="icon">02</div>
-      <h3>Hotels that work</h3>
-      <p>We pre-block rooms across the Galleria, Midtown, Downtown, and the Energy Corridor. You tell us the budget and how far you want to be from NRG; we tell you the trade-off in 24 hours, in writing.</p>
-    </div>
-    <div class="card-service reveal">
-      <div class="icon">03</div>
-      <h3>Airport & ground transport</h3>
-      <p>IAH and Hobby pickups with a name-on-a-sign driver who tracks your flight. Match-night transfers booked early so you're not in a surge queue when the final whistle goes.</p>
-    </div>
-    <div class="card-service reveal">
-      <div class="icon">04</div>
-      <h3>Restaurants & nightlife</h3>
-      <p>Tables held at the places locals actually eat — barbacoa in the East End, Vietnamese on Bellaire, the steakhouse your group keeps texting about. We send a shortlist tuned to your group size and noise tolerance.</p>
-    </div>
-    <div class="card-service reveal">
-      <div class="icon">05</div>
-      <h3>Watch parties (off-days)</h3>
-      <p>Houston hosts 7 of 104 matches; the rest you watch from a rooftop or a Congolese, Brazilian, or Argentine bar with a crowd that cares. We hold table space and we tell you when to show up.</p>
-    </div>
-    <div class="card-service reveal">
-      <div class="icon">06</div>
-      <h3>24/7 multilingual line</h3>
-      <p>One number, one person who knows your itinerary. If you need a doctor, a pharmacy, a translator at the stadium gate, a missed-flight rebook — you call us, not a help desk.</p>
-    </div>
-  </div>
-</section>
-
-<section id="why" class="shell">
-  <div class="split">
+<!-- ════════ WHY HOUSTON ════════ -->
+<section id="why">
+  <div class="shell split">
     <div class="split-image reveal">
-      <img src="./images/services.png" alt="Concierge desk in a Houston hotel lobby helping international fans" loading="lazy">
+      <img src="./images/skyline.png" alt="Houston downtown skyline at dusk">
     </div>
     <div class="split-text reveal">
-      <div class="kicker" style="color:var(--gold); font-size:12px; letter-spacing:.22em; text-transform:uppercase; margin-bottom:1rem;">Why Houston</div>
+      <div class="kicker" style="font-family:'JetBrains Mono',monospace; color:var(--brass); font-size:11.5px; letter-spacing:.22em; text-transform:uppercase; margin-bottom:1rem; display:inline-flex; align-items:center; gap:12px;"><span style="display:inline-block;width:32px;height:1px;background:var(--brass)"></span>Why Houston</div>
       <h2>The host city <em>built for visitors who eat well.</em></h2>
       <p>Of the 16 North American host cities, Houston gets the most group-stage action: seven matches over three weeks at NRG, which holds 72,220 and has a roof for July afternoons that the open-air stadiums don't.</p>
       <p>The city itself is the most international in Texas — 145 languages spoken at home, the fourth-largest population of any US city, and the food scene that goes with it. Long layovers between matches are not a problem here.</p>
@@ -504,104 +812,249 @@
   </div>
 </section>
 
-<section id="how" class="shell">
-  <div class="section-head reveal">
-    <div class="kicker">How it works</div>
-    <h2>Three conversations, <em>one trip you don't have to manage.</em></h2>
-  </div>
-  <div class="steps">
-    <div class="step reveal">
-      <span class="step-num">01</span>
-      <h3>Tell us your shape</h3>
-      <p>20-minute call. Which matches matter, who's coming, what you spend on a good hotel, what would ruin the trip.</p>
+<!-- ════════ GALLERY ════════ -->
+<section id="gallery">
+  <div class="shell">
+    <div class="sec-head reveal">
+      <div class="kicker">The work</div>
+      <h2>A few rooms, plates, and matchdays <em>from the road so far.</em></h2>
+      <p>Snapshots from past Houston and Texas hospitality runs. Drag, scroll, or use the arrows — every card is a real moment we set up.</p>
     </div>
-    <div class="step reveal">
-      <span class="step-num">02</span>
-      <h3>You see options in 24 hours</h3>
-      <p>Tickets, hotel rooms, restaurant slots, transport — three honest scenarios with the costs and the trade-offs in plain English.</p>
-    </div>
-    <div class="step reveal">
-      <span class="step-num">03</span>
-      <h3>We book. You travel.</h3>
-      <p>One invoice, one itinerary PDF, one phone number. We stay on call from your first flight to your last.</p>
+
+    <div class="gallery-wrap reveal">
+      <div class="gallery-row" id="gallery-row">
+        <figure class="polaroid">
+          <div class="pic"><img src="./images/gallery-1-bbq.png" alt="Brisket plate at a Houston BBQ joint" loading="lazy"></div>
+          <figcaption class="caption"><span>The Pinkerton's brisket plate</span><small>Heights · Jun '25</small></figcaption>
+        </figure>
+        <figure class="polaroid">
+          <div class="pic"><img src="./images/gallery-2-hotel-suite.png" alt="Houston hotel suite with skyline view" loading="lazy"></div>
+          <figcaption class="caption"><span>Suite view, Post Oak</span><small>Galleria · Apr '25</small></figcaption>
+        </figure>
+        <figure class="polaroid">
+          <div class="pic"><img src="./images/gallery-3-tickets.png" alt="Match ticket and travel kit flat lay" loading="lazy"></div>
+          <figcaption class="caption"><span>Travel kit, ready</span><small>Day-of</small></figcaption>
+        </figure>
+        <figure class="polaroid">
+          <div class="pic"><img src="./images/gallery-4-night-out.png" alt="Houston Midtown nightlife after the match" loading="lazy"></div>
+          <figcaption class="caption"><span>Post-match, Midtown</span><small>11:48 PM</small></figcaption>
+        </figure>
+        <figure class="polaroid">
+          <div class="pic"><img src="./images/gallery-5-tailgate.png" alt="NRG tailgate before a match" loading="lazy"></div>
+          <figcaption class="caption"><span>Tailgate, NRG lot 21</span><small>Pre-match</small></figcaption>
+        </figure>
+        <figure class="polaroid">
+          <div class="pic"><img src="./images/gallery-6-ranch.png" alt="Hill Country ranch dinner table at sunset" loading="lazy"></div>
+          <figcaption class="caption"><span>Hill Country, off-day</span><small>Round-of-16 break</small></figcaption>
+        </figure>
+      </div>
+      <div class="gallery-hint">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        Drag to flip through · hover to lift
+      </div>
     </div>
   </div>
 </section>
 
-<section class="shell">
-  <div class="feature reveal">
-    <div class="feature-image"><img src="./images/watch-party.png" alt="Rooftop watch party in Houston during the World Cup 2026"></div>
-    <div class="feature-body">
-      <span class="eyebrow">For the dark days</span>
-      <h2>Houston gets seven matches. The tournament is 104.</h2>
-      <p>The off-days are where the trip is made or lost. We book table space at the rooftop, the Congolese bar in Alief, the Argentine parrilla in the Heights, the Brazilian botequim near the Galleria — whichever flag you fly, there's a room here that fills up for it.</p>
-      <a href="#contact" class="btn-primary">Get the off-day map</a>
+<!-- ════════ HOW IT WORKS ════════ -->
+<section id="how">
+  <div class="shell">
+    <div class="sec-head reveal">
+      <div class="kicker">Process</div>
+      <h2>Three conversations, <em>one trip you don't have to manage.</em></h2>
+    </div>
+    <div class="steps">
+      <div class="step reveal">
+        <span class="step-num">01</span>
+        <h3>Tell us your shape</h3>
+        <p>Twenty minutes on the phone. Which matches matter, who's coming, what you'll spend on a good hotel, what would ruin the trip.</p>
+      </div>
+      <div class="step reveal">
+        <span class="step-num">02</span>
+        <h3>Options in 24 hours</h3>
+        <p>Tickets, hotel rooms, restaurant slots, transport — three honest scenarios with the costs and the trade-offs spelled out in plain English.</p>
+      </div>
+      <div class="step reveal">
+        <span class="step-num">03</span>
+        <h3>We book. You travel.</h3>
+        <p>One invoice. One itinerary PDF. One phone number. We stay on call from your first flight to your last.</p>
+      </div>
     </div>
   </div>
 </section>
 
-<section id="faq" class="shell">
-  <div class="section-head reveal">
-    <div class="kicker">Common questions</div>
-    <h2>What people ask <em>before they hand us a credit card.</em></h2>
-  </div>
-  <div class="faq-list">
-    <details>
-      <summary>What languages does your team actually speak?</summary>
-      <p>English, Spanish, French, and Portuguese — natively, not via Google Translate. If you need another language, tell us at the first call and we'll line up a local interpreter for the matches that matter.</p>
-    </details>
-    <details>
-      <summary>Where do the match tickets come from?</summary>
-      <p>Verified resale channels with FIFA-compliant transfer paths, plus direct allocations from hospitality partners for Category 1 / hospitality requests. We do not promise lottery tickets we don't have, and we'll tell you in writing where each seat came from.</p>
-    </details>
-    <details>
-      <summary>How much does it cost to work with you?</summary>
-      <p>The concierge fee is a flat percentage of the package or a per-day rate, depending on what you book. Hotels and tickets pass through at cost; you see every line on one invoice. We share the number on the first call, before any work starts.</p>
-    </details>
-    <details>
-      <summary>Can I customize the itinerary as we go?</summary>
-      <p>Yes — that's the whole point. The first 24-hour quote is a starting draft. We refine it across two or three rounds until the trip looks like something you'd actually want to live for three weeks.</p>
-    </details>
-    <details>
-      <summary>What if something goes wrong during the trip?</summary>
-      <p>You call the one number on your itinerary card. Someone from the team picks up between 7am and 11pm Central, and there's a backup line for genuine emergencies overnight. Missed flights, lost passports, sick kids — we've handled all of those.</p>
-    </details>
-  </div>
-</section>
-
-<section id="contact" class="shell">
-  <div class="final-cta reveal">
-    <span class="eyebrow">Talk to a human</span>
-    <h2>Got a question that doesn't fit a form?</h2>
-    <p>Email gets a reply same day. The call is 20 minutes and there's no obligation attached to it.</p>
-    <div class="actions">
-      <a href="mailto:concierge@houston2026.travel?subject=World%20Cup%202026%20%E2%80%94%20concierge%20enquiry" class="btn-primary">
-        Email concierge@houston2026.travel
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-      </a>
-      <a href="https://wa.me/15125550100" class="btn-ghost">WhatsApp us</a>
+<!-- ════════ WATCH PARTIES FEATURE ════════ -->
+<section>
+  <div class="shell">
+    <div class="feature reveal">
+      <div class="feature-image"><img src="./images/watch-party.png" alt="Rooftop watch party in Houston during the World Cup 2026"></div>
+      <div class="feature-body">
+        <span class="eyebrow"><span class="star"></span> For the dark days</span>
+        <h2>Houston gets seven matches. The tournament is 104.</h2>
+        <p>The off-days are where the trip is made or lost. We hold table space at the rooftop, the Congolese bar in Alief, the Argentine parrilla in the Heights, the Brazilian botequim near the Galleria — whichever flag you fly, there's a room in Houston that fills up for it.</p>
+        <a href="#contact" class="btn-primary">Get the off-day map →</a>
+      </div>
     </div>
-    <div class="contact-line">Or text <a href="sms:+15125550100">+1 (512) 555-0100</a> — local Houston number, replies within the hour.</div>
   </div>
 </section>
 
-<footer class="shell">
-  <div class="foot">
-    <p><strong>Houston 2026 Concierge</strong> · Boutique trip planning for the FIFA World Cup 2026</p>
-    <p>NRG Stadium · 1 NRG Pkwy, Houston, TX 77054</p>
-    <p>© 2026 · Built in Houston for fans worldwide</p>
+<!-- ════════ FAQ ════════ -->
+<section id="faq">
+  <div class="shell">
+    <div class="sec-head reveal">
+      <div class="kicker">Common questions</div>
+      <h2>What people ask <em>before they hand us a credit card.</em></h2>
+    </div>
+    <div class="faq-list">
+      <details>
+        <summary>What languages does your team actually speak?</summary>
+        <p>English, Spanish, French, and Portuguese — natively, not through Google Translate. If you need another language, tell us at the first call and we'll line up a local interpreter for the matches that matter.</p>
+      </details>
+      <details>
+        <summary>Where do the match tickets come from?</summary>
+        <p>Verified resale channels with FIFA-compliant transfer paths, plus direct allocations from hospitality partners for Category 1 and hospitality requests. We do not promise lottery tickets we don't have, and we tell you in writing where each seat came from.</p>
+      </details>
+      <details>
+        <summary>How much does it cost to work with you?</summary>
+        <p>The concierge fee is a flat percentage of the package or a per-day rate, depending on what you book. Hotels and tickets pass through at cost; every line shows on one invoice. We share the number on the first call, before any work starts.</p>
+      </details>
+      <details>
+        <summary>Can I customize the itinerary as we go?</summary>
+        <p>Yes — that's the whole point. The first 24-hour quote is a starting draft. We refine it across two or three rounds until the trip looks like something you'd actually want to live for three weeks.</p>
+      </details>
+      <details>
+        <summary>What if something goes wrong during the trip?</summary>
+        <p>You call the one number on your itinerary card. Someone from the team picks up between 7am and 11pm Central, and there's a backup line for genuine emergencies overnight. Missed flights, lost passports, sick kids — handled all of those.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ FINAL CTA ════════ -->
+<section id="contact">
+  <div class="shell">
+    <div class="final-cta reveal">
+      <div class="tx-shape" aria-hidden="true">
+        <svg viewBox="0 0 1000 900" fill="currentColor">
+          <path d="M180 220 L260 220 L290 180 L370 195 L420 175 L520 195 L620 205 L660 230 L720 230 L760 220 L820 240 L820 320 L800 380 L790 460 L800 540 L760 600 L700 660 L640 700 L580 720 L520 760 L470 800 L420 800 L370 760 L320 700 L270 660 L230 600 L195 540 L180 460 L185 380 L175 320 Z"/>
+        </svg>
+      </div>
+      <span class="eyebrow"><span class="star"></span> Talk to a human</span>
+      <h2>Got a question that doesn't fit a form?</h2>
+      <p>Email gets a reply same day. The call is twenty minutes and there's no obligation attached to it.</p>
+      <div class="actions">
+        <a href="mailto:concierge@houston2026.travel?subject=World%20Cup%202026%20%E2%80%94%20concierge%20enquiry" class="btn-primary">
+          Email the concierge
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+        <a href="https://wa.me/15125550100" class="btn-ghost">WhatsApp us</a>
+      </div>
+      <div class="contact-line">Or text <a href="sms:+15125550100">+1 (512) 555-0100</a> — local number, replies within the hour.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ FOOTER ════════ -->
+<footer>
+  <div class="shell">
+    <div class="foot-grid">
+      <div>
+        <a href="#" class="brand" style="margin-bottom: 1.4rem; display: inline-flex;">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 1.5l2.75 7.55h7.95l-6.43 4.67 2.46 7.58L12 16.6l-6.73 4.7 2.46-7.58L1.3 9.05h7.95z"/></svg>
+          </span>
+          <span class="brand-text">
+            <strong>Houston 2026</strong>
+            <small>Concierge · Texas hospitality</small>
+          </span>
+        </a>
+        <p style="color: var(--ink-dim); font-size: 14px; line-height: 1.7; max-width: 22rem;">Boutique trip planning for the FIFA World Cup 2026. Texas-grown, internationally fluent.</p>
+      </div>
+      <div>
+        <h4>Service</h4>
+        <a href="#services">What we handle</a>
+        <a href="#how">Process</a>
+        <a href="#gallery">The work</a>
+        <a href="#faq">FAQ</a>
+      </div>
+      <div>
+        <h4>Houston</h4>
+        <p>NRG Stadium<br>1 NRG Pkwy<br>Houston, TX 77054</p>
+      </div>
+      <div>
+        <h4>Get in touch</h4>
+        <a href="mailto:concierge@houston2026.travel">concierge@houston2026.travel</a>
+        <a href="sms:+15125550100">+1 (512) 555-0100</a>
+        <a href="https://wa.me/15125550100">WhatsApp</a>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <p>© 2026 Houston 2026 Concierge · Built in Texas for fans worldwide</p>
+      <p>FIFA World Cup 2026 · June 14 – July 4</p>
+    </div>
   </div>
 </footer>
 
 <script>
-  // Soft reveal-on-scroll
+  // Reveal on scroll
   if ('IntersectionObserver' in window) {
     const io = new IntersectionObserver((entries) => {
       entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
-    }, { threshold: 0.12 });
+    }, { threshold: 0.10 });
     document.querySelectorAll('.reveal').forEach(el => io.observe(el));
   } else {
     document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+  }
+
+  // Mouse-tilt the hero stage
+  const stage = document.querySelector('[data-tilt]');
+  const card = stage && stage.querySelector('.hero-card');
+  if (stage && card && window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+    let raf;
+    stage.addEventListener('mousemove', (e) => {
+      const rect = stage.getBoundingClientRect();
+      const px = (e.clientX - rect.left) / rect.width;
+      const py = (e.clientY - rect.top) / rect.height;
+      const ry = (px - 0.5) * 16; // -8 to 8
+      const rx = (0.5 - py) * 10; // -5 to 5
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        card.style.transform = `rotateY(${-7 + ry}deg) rotateX(${4 + rx}deg)`;
+      });
+    });
+    stage.addEventListener('mouseleave', () => {
+      card.style.transform = 'rotateY(-7deg) rotateX(4deg)';
+    });
+  }
+
+  // Light spotlight on service cards
+  document.querySelectorAll('[data-tilt-card]').forEach(c => {
+    c.addEventListener('mousemove', (e) => {
+      const r = c.getBoundingClientRect();
+      const mx = ((e.clientX - r.left) / r.width) * 100;
+      const my = ((e.clientY - r.top) / r.height) * 100;
+      c.style.setProperty('--mx', mx + '%');
+      c.style.setProperty('--my', my + '%');
+    });
+  });
+
+  // Gallery: drag-to-scroll on desktop
+  const row = document.getElementById('gallery-row');
+  if (row) {
+    let down = false, startX = 0, startScroll = 0;
+    row.addEventListener('pointerdown', (e) => {
+      down = true; startX = e.clientX; startScroll = row.scrollLeft;
+      row.setPointerCapture(e.pointerId);
+      row.style.cursor = 'grabbing';
+    });
+    row.addEventListener('pointermove', (e) => {
+      if (!down) return;
+      row.scrollLeft = startScroll - (e.clientX - startX);
+    });
+    const end = () => { down = false; row.style.cursor = 'grab'; };
+    row.addEventListener('pointerup', end);
+    row.addEventListener('pointercancel', end);
+    row.style.cursor = 'grab';
   }
 </script>
 </body>
